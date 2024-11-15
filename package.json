@@ -6,7 +6,7 @@
     "license": "Commercial",
     "scripts": {
         "dev": "vite",
-        "build": "php artisan lang:js --quiet && vite build"
+        "build": "vite build"
     },
     "devDependencies": {
         "@alpinejs/focus": "^3.10.5",

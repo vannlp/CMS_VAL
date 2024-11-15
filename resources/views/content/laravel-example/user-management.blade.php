@@ -32,7 +32,7 @@
 
 <!-- Page Scripts -->
 @section('page-script')
-@vite(['resources/js/laravel-user-management.js'])
+{{-- @vite(['resources/js/laravel-user-management.js']) --}}
 @endsection
 
 @section('content')

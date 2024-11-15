@@ -23,7 +23,13 @@ return [
         'create_data_success' => "Thêm mới dữ liệu thành công",
         'create_data_error' => "Thêm mới dữ liệu thất bại",
         'create' => 'Thêm mới',
-        
+        'type' => 'Kiểu',
+        'title' => 'Tiêu đề',
+        'description' => 'Mô tả',
+        'slug' => "Đường dẫn",
+        'author' => "Tác giả",
+        'avatar' => "Ảnh đại diện",
+        'category' => "Danh mục"
     ], 
 
     "menu" => [],
@@ -46,7 +52,21 @@ return [
         'create_permission' => 'Thêm mới vai trò',
         'permission_index' => 'Xem danh sách vai trò',
         'update_permission' => 'Cập nhập vai trò'
+    ],
+
+    'story' => [
+        'title' => "Truyện",
+        'category_title' => 'Danh mục truyện',
+        'category_feild' => [
+            'name' => 'Tên danh mục',
+            'short_description' => 'Mô tả ngắn',
+            'description' => 'Mô tả',
+            'parent' => 'Danh mục cha',
+            'status' => 'Trạng thái',
+            'slug' => 'Slug',
+            'type' => 'Loại'
+        ],
+        'create_category' => 'Tạo mới danh mục',
+        'edit_category' => "Chỉnh sửa danh mục"
     ]
-
-
 ];

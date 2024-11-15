@@ -7,6 +7,7 @@ use Yajra\DataTables\Facades\DataTables;
 abstract class BaseDataTable {
     protected $query;
     protected $columns = [];
+    protected $rawColumns = [];
     protected $dataTable;
     
     public function __construct()
@@ -27,6 +28,7 @@ abstract class BaseDataTable {
         $this->query($this->query);
         $this->dataTable = DataTables::of($this->query);
         $this->dataTable->only($this->columns);
+        $this->dataTable->rawColumns($this->rawColumns);
         $this->editColumn($this->dataTable);
         return $this->dataTable->toJson();
     }

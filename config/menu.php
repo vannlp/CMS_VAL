@@ -39,6 +39,31 @@ return [
       ],
       
       [
+        "name" => "Truyện",
+        "icon" => "menu-icon tf-icons ri-book-line",
+        "slug" => "story",
+        'permission_group' => 'story',
+        "badge" => [
+          // "danger",
+          // "5"
+        ],
+        "submenu" => [
+          [
+            "url" => "/admin/story/category",
+            "name" => "Danh mục",
+            "slug" => "story-category",
+            "permission_name" => 'story.category'
+          ],
+          [
+            "url" => "/admin/story",
+            "name" => "Danh sách truyện",
+            "slug" => "story-index",
+            "permission_name" => ''
+          ],
+        ]
+      ],
+      
+      [
         "name" => "Settings",
         "icon" => "menu-icon tf-icons ri-settings-2-line",
         "slug" => "settings",

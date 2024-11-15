@@ -199,6 +199,7 @@ return [
         App\Providers\MenuServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Arcanedev\LaravelLang\LaravelLangServiceProvider::class,
+        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
     ],
 
     /*
@@ -215,7 +216,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Helper' => App\Helpers\Helpers::class,
-        'Permission' => \App\Facades\Permission::class,
+        'Permission' => \App\Facades\Permission::class
     ])->toArray(),
 
 ];
