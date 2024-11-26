@@ -44,7 +44,7 @@ class UserDataTable extends BaseDataTable {
     
     public function editColumn($dataTable) {
         $dataTable->addColumn("role", function($item) {
-            return $item->role->name;
+            return $item->role->name ?? null;
         });
         
     }

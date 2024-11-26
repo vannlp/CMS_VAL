@@ -132,6 +132,15 @@ return [
     'should_create_thumbnails' => true,
 
     'thumb_folder_name'        => 'thumbs',
+    
+    'allow_image_resize' => true,
+    'resize' => [
+        'default' => [
+            'small' => [200, 200],
+            'medium' => [600, 600],
+            'large' => [1200, 1200],
+        ],
+    ],
 
     // Create thumbnails automatically only for listed types.
     'raster_mimetypes'         => [

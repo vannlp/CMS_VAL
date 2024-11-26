@@ -17,11 +17,12 @@ class StoryDataTable extends BaseDataTable {
         'list_category',
         'author_id',
         'status',
-        'image_id',
         'created_at',
         'updated_at',
         'avatar',
-        'author'
+        'author',
+        'story_info',
+        'chapters_count'
     ];
     
     /**
@@ -37,7 +38,9 @@ class StoryDataTable extends BaseDataTable {
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function modelQuery(){
-        return StoryPost::query()->with(['acthor', 'image']);
+        return StoryPost::query()->with(['acthor'])->withCount(['chapters' => function ($query)  {
+            $query->where('status', '1');
+        }]);
     }
     
     /**
@@ -74,9 +77,12 @@ class StoryDataTable extends BaseDataTable {
      */
     public function editColumn($dataTable) {
         
+        $dataTable->addColumn('chapters_count', function($item) {
+            return $item->chapters_count ?? 0;
+        });
+        
         $dataTable->addColumn('story_info', function($item) {
-            $avatar = $item->image;
-            $avatar_url = $avatar->url ?? '';
+            $avatar_url = $item->avatar ?? '';
             $html = "
             <div class='d-flex justify-content-start align-items-center'>
                 <div class='avatar-wrapper me-3'>

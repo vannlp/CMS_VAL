@@ -19,7 +19,8 @@ class StoryPost extends Model
         'list_category',
         'author_id',
         'status',
-        'image_id',
+        'avatar',
+        'meta_description',
         'created_at',
         'updated_at',
     ];
@@ -48,5 +49,12 @@ class StoryPost extends Model
     {
         return $this->belongsTo(File::class, 'image_id', 'id');
     }
+    
+    public function chapters() {
+        return $this->hasMany(StoryChapter::class, 'story_id', 'id');
+    }
 
+    public function views() {
+        return $this->hasMany(PostView::class, 'post_id', 'id')->where('table', 'story_post');
+    }
 }

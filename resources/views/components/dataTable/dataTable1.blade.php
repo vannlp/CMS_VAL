@@ -3,7 +3,8 @@
     'route' => false,
     'id' => '',
     'setting' => [],
-    'addScript' => ''
+    'addScript' => '',
+    'addScriptAfter' => ''
 ])
 {{-- Styles --}}
 @push('styles')
@@ -32,7 +33,7 @@
 @push('scripts')
 <script>
     let settings_{{$id}} = {};
-    let params_{{$id}} = {};
+    let params_{{$id}} = null;
 </script>
 
 {{ $addScript }}
@@ -45,17 +46,15 @@
             ajax: {
                 url: '{{ route($route) }}',
                 type: "GET",
-                data: (data) => {
-                    for (let key in params_{{$id}}) {
-                        let obj = params_{{$id}}[key];
-                        data[key] = obj;
-                    }
-                    return data;
+                data: function(data) {
+                    return params_{{$id}}(data);
                 }
             },
             ...settings_{{$id}},
         })
         
+        
+        {{ $addScriptAfter }}
     })
     
 </script>

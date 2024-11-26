@@ -119,8 +119,8 @@
               ]
             };
             
-            params_userData = {
-              h: 123
+            params_userData = (data) => {
+                return data;
             }
           </script>
         </x-slot:addScript>

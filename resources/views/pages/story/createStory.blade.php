@@ -14,6 +14,7 @@
   'resources/assets/vendor/libs/bootstrap-select/bootstrap-select.scss',
   'resources/assets/vendor/libs/dropzone/dropzone.scss'
 ])
+<link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet">
 @endsection
 
 @section('page-style')
@@ -31,6 +32,8 @@
   'resources/assets/vendor/libs/dropzone/dropzone.js'
   ])
 <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+<script type="module" src="{{asset('/vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
+<script type="module" src="https://unpkg.com/cropperjs/dist/cropper.js"></script>
 @endsection
 
 @section('page-script')
@@ -102,7 +105,7 @@
                   <label for="author_id_create">{{__('app.base.author')}}</label>
                 </div>
               </div>
-              <input type="file" name="avatar" id="avatar_input" hidden>
+              
               <div class="col-6 mb-4" >
                 <div class="text-light small fw-medium mb-3">{{__('app.base.status')}}</div>
                 <label class="switch">
@@ -113,6 +116,13 @@
                   </span>
                   <span class="switch-label">{{__('app.base.status')}}</span>
                 </label>
+              </div>
+              
+              <div class="col-6 mb-4" >
+                <div class="form-floating form-floating-outline">
+                  <input type="text" name="meta_description" id="meta_description_create" class="form-control" />
+                  <label for="meta_description_create">{{__('app.base.meta_description')}}</label>
+                </div>
               </div>
             </div>
             
@@ -126,7 +136,7 @@
   </div>
   
   <div class="card-body">
-    <div class="row">
+    {{-- <div class="row">
       <div class="col-12 mb-4" >
         <form action="/upload" class="dropzone needsclick" id="dropzone-basic-test">
           <div class="dz-message needsclick my-12">
@@ -146,7 +156,34 @@
           </div>
         </form>
       </div>
+    </div> --}}
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="thumbnail">Image</label>
+          <div class="input-group">
+              <input id="thumbnail" class="form-control" form="create_story_form" readonly type="text" name="avatar">
+              <span class="input-group-append">
+                  <button id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                      <i class="fa fa-picture-o"></i> Choose
+                  </button>
+              </span>
+          </div>
+        </div>
+        <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+
+      </div>
+      
+      {{-- <div class="col-6">
+        <input type="file" id="imageInput" accept="image/*">
+        <div id="imageContainer">
+            <img id="image" src="" style="max-width: 100%;" />
+        </div>
+        <button id="cropButton">Cắt và Lưu</button>
+      </div> --}}
     </div>
+    
+  
   </div>
     
 </div>
@@ -161,10 +198,13 @@
   </div>
 </div>
 
+
+
 @endsection
 
 
 @push('scripts')
+
 <script type="module" defer>
   // Khởi tạo CKEditor cho textarea với ID là 'editor'
   CKEDITOR.replace('editor', {
@@ -172,7 +212,8 @@
     filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token={{ csrf_token() }}',
     filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
     filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token={{ csrf_token() }}',
-    height: '500'
+    height: '500',
+    versionCheck: false,
   });
   
   const previewTemplate = `<div class="dz-preview dz-file-preview">
@@ -192,41 +233,8 @@
     </div>
     </div>`;
   
-  // const dropzone_basic = document.querySelector('#dropzone-basic');
-  // Dropzone.autoDiscover = false;
-
-  const dropzone = new Dropzone("#dropzone-basic-test", {
-    previewTemplate: previewTemplate,
-    maxFilesize: 5,
-    maxFiles: 1,
-    acceptedFiles: ".jpg,.jpeg,.png,.gif",
-    previewTemplate: previewTemplate,
-    parallelUploads: 1,
-    addRemoveLinks: true,
-    init: function () {
-      this.on("addedfile", function (file) {
-        const input = document.querySelector("#avatar_input");
-
-        if (input) {
-          // Tạo DataTransfer để gắn file vào input
-          const dataTransfer = new DataTransfer();
-          dataTransfer.items.add(file); // Thêm file vào DataTransfer
-          input.files = dataTransfer.files; // Gắn FileList vào input
-        } else {
-          console.error("Element with ID 'avatar_input' not found");
-        }
-      });
-
-      this.on("removedfile", function () {
-        const input = document.querySelector("#avatar_input");
-
-        if (input) {
-          // Xóa file khỏi input khi bị xóa
-          const dataTransfer = new DataTransfer();
-          input.files = dataTransfer.files; // Reset FileList
-        }
-      });
-    }
-  });
+  $('#lfm').filemanager('image');
+  
+  // Ghi đè callback mặc định của filemanager
 </script>
 @endpush

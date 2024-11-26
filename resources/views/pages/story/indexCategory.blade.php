@@ -106,7 +106,7 @@
         <x-dataTable.dataTable1 id="storyCategoryData" :header="$header" route="admin.story.category.datatable" :setting="$settings">
           <x-slot:addScript>
             <script type="module">
-              let type_filter = $("#type_filter").val();
+              window.type_filter = $("#type_filter").val();
               settings_storyCategoryData = {
                 columns: [
                   { data: 'id', name: 'id' },
@@ -144,14 +144,19 @@
                 ]
               };
               
-              params_storyCategoryData = {
-                type_filter: type_filter
+              params_storyCategoryData = (data) => {
+                data.type_filter = window.type_filter;
+                
+                return data;
               }
               
               $("#type_filter").on('change', function() {
-                type_filter = $(this).val();
+                window.type_filter = $(this).val();
+                console.log(window.type_filter);
+                
                 window.storyCategoryData_datatable.ajax.reload();
               })
+              
             </script>
           </x-slot:addScript>
         </x-dataTable.dataTable1>
@@ -357,6 +362,8 @@
 
 @push('scripts')
 <script type="module" defer>
+  
+  
   $(document).on('click', '.delete-record', function() {
       let id =  $(this).data('id');
       if(confirm("Bạn có đồng ý xóa?")) {

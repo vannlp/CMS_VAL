@@ -7,11 +7,14 @@ use App\Http\Controllers\Settings\SettingController;
 use App\Http\Controllers\Story\StoryCategoryController;
 use App\Http\Controllers\Story\StoryController;
 use App\Http\Controllers\User\UserController;
+use App\Scraper\TruyenFull;
 use Illuminate\Support\Facades\Route;
 
 
 Route::prefix("/admin")->name("admin.")->middleware('auth.admin')->group(function() {
     Route::get("/", function () {
+        // $truyenFull = new TruyenFull();
+        // $truyenFull->scrape();
         return view("pages.dashboard");
     });
     
@@ -50,7 +53,16 @@ Route::prefix("/admin")->name("admin.")->middleware('auth.admin')->group(functio
         Route::get("/", [StoryController::class, "index"])->name('story.index');
         Route::get("/datatable", [StoryController::class, "datatable"])->name('story.datatable');
         Route::get("/create", [StoryController::class, "create"])->name('story.create');
+        Route::get("/createChapter", [StoryController::class, "createChapter"])->name('story.createChapter');
+        Route::post("/storeChapter", [StoryController::class, "storeChapter"])->name('story.storeChapter');
+        Route::put("/update/{id}", [StoryController::class, "update"])->name('story.update');
         Route::post("/store", [StoryController::class, "store"])->name('story.store');
+        Route::get("/edit/{id}", [StoryController::class, "edit"])->name('story.edit');
+        Route::get("/editChapter/{chapter_id}", [StoryController::class, "editChapter"])->name('story.editChapter');
+        Route::get('chapter/datatable', [StoryController::class, "storyChapterDatatable"])->name('story.chapter.datatable');
+        Route::delete('/deleteChapter/{id}', [StoryController::class, "deleteChapter"])->name('story.deleteChapter');
+        Route::delete('/deleteStory/{id}', [StoryController::class, "deleteStory"])->name('story.deleteStory');
+        Route::put("/updateChapter/{id}", [StoryController::class, "updateChapter"])->name('story.updateChapter');
     });
 });
 Route::get("/admin/login", [LoginController::class, 'loginAdmin'])->name("admin.login");

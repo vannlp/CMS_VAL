@@ -29,7 +29,10 @@ return [
         'slug' => "Đường dẫn",
         'author' => "Tác giả",
         'avatar' => "Ảnh đại diện",
-        'category' => "Danh mục"
+        'category' => "Danh mục",
+        'meta_description' => 'Thẻ meta description',
+        'update' => "Cập nhập",
+        'created_at' => 'Ngày tạo'
     ], 
 
     "menu" => [],
@@ -67,6 +70,10 @@ return [
             'type' => 'Loại'
         ],
         'create_category' => 'Tạo mới danh mục',
-        'edit_category' => "Chỉnh sửa danh mục"
+        'edit_category' => "Chỉnh sửa danh mục",
+        'chapters_count' => "Số chapter",
+        'title_chapter' => 'Tên chương',
+        'slug_chapter' => 'Slug chương',
+        'status_chapter' => 'Trạng thái chương'
     ]
 ];

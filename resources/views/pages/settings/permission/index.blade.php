@@ -104,9 +104,10 @@
               ]
             };
             
-            params_roleData = {
-              h: 123
-            }
+            params_roleData = (data) => {
+                
+                return data;
+              }
           </script>
         </x-slot:addScript>
       </x-dataTable.dataTable1>

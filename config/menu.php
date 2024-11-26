@@ -52,13 +52,13 @@ return [
             "url" => "/admin/story/category",
             "name" => "Danh mục",
             "slug" => "story-category",
-            "permission_name" => 'story.category'
+            "permission_name" => 'story.index'
           ],
           [
             "url" => "/admin/story",
             "name" => "Danh sách truyện",
             "slug" => "story-index",
-            "permission_name" => ''
+            "permission_name" => 'story.index'
           ],
         ]
       ],

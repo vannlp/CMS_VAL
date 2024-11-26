@@ -79,6 +79,7 @@
             __('app.base.slug'),
             __('app.base.author'),
             __('app.base.status'),
+            __('app.story.chapters_count'),
             __('app.base.action'),
           ];    
           $settings = [
@@ -103,14 +104,15 @@
                       }
                       return html;
                   }, },
+                  { data: 'chapters_count', name: 'chapters_count' },
                   { title: "action", render(data, type, row) {
                     let deleteButton = `<button 
                       data-id="${row.id}"
                       href="javascript:;" class="btn btn-sm btn-icon btn-text-secondary rounded-pill waves-effect delete-record" data-bs-toggle="tooltip" title="Delete"><i class="ri-delete-bin-7-line ri-20px"></i></button>`;
-                    
-                    let editButton = `<button
+                    let href_link = `{{ route('admin.story.edit', ['id' => '__ID__']) }}`.replace('__ID__', row.id);
+                    let editButton = `<a
                             data-id="${row.id}"
-                            href="javascript:;" class="btn btn-sm btn-icon btn-text-secondary rounded-pill waves-effect edited_category" data-bs-toggle="tooltip" title="Edit"><i class="ri-edit-box-line"></i></button>`;
+                            href="${href_link}" class="btn btn-sm btn-icon btn-text-secondary rounded-pill waves-effect edited_category" data-bs-toggle="tooltip" title="Edit"><i class="ri-edit-box-line"></i></a>`;
                     
                     let groupAction = `
                       <div class="d-flex align-items-center gap-50">
@@ -124,8 +126,8 @@
                 ]
               };
               
-              params_storyData = {
-                // type_filter: type_filter
+              params_storyData = (data) => {
+                return data;
               }
               
             </script>
@@ -138,18 +140,18 @@
 
 
 @push('scripts')
-{{-- <script type="module" defer>
+<script type="module" defer>
   $(document).on('click', '.delete-record', function() {
       let id =  $(this).data('id');
       if(confirm("Bạn có đồng ý xóa?")) {
-        window.axios.delete(`{{ route('admin.story.category.delete', ['id' => '__ID__']) }}`.replace('__ID__', id))
+        window.axios.delete(`{{ route('admin.story.deleteStory', ['id' => '__ID__']) }}`.replace('__ID__', id))
           .then(function(response) {
             alert(`${response.message}`);
-            window.storyCategoryData_datatable.ajax.reload();
+            window.storyData_datatable.ajax.reload();
           }).catch((err) => {
             alert(`${err}`);
           })
       }
     })
-</script> --}}
+</script>
 @endpush

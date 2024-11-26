@@ -60,4 +60,25 @@ return [
             'admin.permission.getPermissions'
         ]
     ],
+    
+    'story' => [
+        'name' => "Story",
+        'code' => 'story',
+        'type' => 'group',
+        'isUse' => true,
+        'auth' => true,
+    ],
+    
+    'story.index' => [
+        'name' => "Story list",
+        'code' => 'story.index',
+        'type' => 'permission',
+        'isUse' => true,
+        'list_route_name' => [
+            'admin.story.category',
+            'admin.story.category.datatable',
+            'admin.story.category.getOne',
+            'story.index'
+        ]
+    ],
 ];

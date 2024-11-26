@@ -50,4 +50,16 @@ class StoryCategoryRepository extends Repository {
 
         return $storyCategory;
     }
+    
+    public function getCategories() {
+        return $this->model->where('status', 1)->where('type', 'category');
+    }
+    
+    public function getAuthors() {
+        return $this->model->where('status', 1)->where('type', 'author');
+    }
+    
+    public function getCategoryHomeOption() {
+        return $this->model->select(['id', 'name'])->where('status', 1)->where('type', 'category');
+    }
 }

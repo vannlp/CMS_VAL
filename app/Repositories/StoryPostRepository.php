@@ -31,4 +31,23 @@ class StoryPostRepository extends Repository {
 
         return $story;
     }
+    
+    public function update(array $data, $id)
+    {
+        $authorIdNull = -1;
+        
+        if(empty($data['status'])) {
+            $data['status'] = 0;
+        } else {
+            $data['status'] = 1;
+        }
+
+        $story = parent::update($data, $id);
+
+        return $story;
+    }
+    
+    public function getStoryPostByView() {
+        return $this->model->withCount('views')->where('status', 1)->orderBy('views_count', 'asc');
+    }
 }

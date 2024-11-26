@@ -20,13 +20,18 @@ abstract class BaseDataTable {
     public function query($query) {
     }
     
+    public function queryAfter($dataTable) {
+        
+    }
+    
     public function editColumn($dataTable) {
         
     }
     
     public function build() {
         $this->query($this->query);
-        $this->dataTable = DataTables::of($this->query);
+        $this->dataTable = DataTables::eloquent($this->query);
+        $this->queryAfter($this->dataTable);
         $this->dataTable->only($this->columns);
         $this->dataTable->rawColumns($this->rawColumns);
         $this->editColumn($this->dataTable);
