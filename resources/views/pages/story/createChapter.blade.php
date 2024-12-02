@@ -100,6 +100,13 @@
               
               <div class="col-6 mb-4" >
                 <div class="form-floating form-floating-outline">
+                  <input type="number" name="chapter_num" id="chapter_num" class="form-control" />
+                  <label for="chapter_num">{{__('app.story.chapter_number')}}</label>
+                </div>
+              </div>
+              
+              <div class="col-6 mb-4" >
+                <div class="form-floating form-floating-outline">
                   <input type="text" name="meta_description" id="meta_description_create" class="form-control" />
                   <label for="meta_description_create">{{__('app.base.meta_description')}}</label>
                 </div>

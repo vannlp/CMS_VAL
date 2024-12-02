@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0021)https://suustore.com/ -->
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,6 +11,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
     <!-- Bootstrap CSS v5.2.1 -->
@@ -19,20 +20,20 @@
 
     <link rel="shortcut icon" href="https://suustore.com/assets/frontend/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="{{asset('/FE/assets/app.css')}}">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.8/axios.min.js" integrity="sha512-v8+bPcpk4Sj7CKB11+gK/FnsbgQ15jTwZamnBf/xDmiQDcgOIYufBo6Acu1y30vrk8gg5su4x0CG3zfPaq5Fcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
     <script>
         window.SuuTruyen = {
-            baseUrl: 'https://suustore.com',
-            urlCurrent: 'https://suustore.com',
-            csrfToken: '4EebYu2rWivdRk1ET12dyuY0CJjpRERhJynPtvUy'
+            baseUrl: "{{url('/')}}",
+            urlCurrent: "{{url('/')}}",
+            csrfToken: "{{ csrf_token() }}"
         }
     </script>
 
-    <title>Demo Truyện</title>
+    <title>@yield('title', 'Truyện chữ online')</title>
     <meta name="description"
-        content="Đọc truyện online, truyện hay. Demo Truyện luôn tổng hợp và cập nhật các chương truyện một cách nhanh nhất.">
+        content="@yield('meta_description', 'Mô tả truyện chữ online')">
         
     @stack('styles')
 </head>

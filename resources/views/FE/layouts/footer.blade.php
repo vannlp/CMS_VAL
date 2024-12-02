@@ -8,72 +8,12 @@
                 động và máy tính bảng.
             </div>
             <ul class="col-12 col-md-7 list-unstyled d-flex flex-wrap list-tag">
-                <li class="me-1">
+                {{-- <li class="me-1">
                     <span class="badge text-bg-light"><a class="text-dark text-decoration-none"
                             href="#" title="đam mỹ hài">đam mỹ
                             hài</a></span>
-                </li>
-                <li>
-                    <span class="badge text-bg-light"><a class="text-dark text-decoration-none"
-                            href="#" title="truyện xuyên nhanh">truyện
-                            xuyên
-                            nhanh</a></span>
-                </li>
-                <li class="me-1">
-                    <span class="badge text-bg-light"><a class="text-dark text-decoration-none"
-                            href="#" title="đam mỹ hài">đam mỹ
-                            hài</a></span>
-                </li>
-                <li>
-                    <span class="badge text-bg-light"><a class="text-dark text-decoration-none"
-                            href="#" title="truyện xuyên nhanh">truyện
-                            xuyên
-                            nhanh</a></span>
-                </li>
-                <li class="me-1">
-                    <span class="badge text-bg-light"><a class="text-dark text-decoration-none"
-                            href="#" title="đam mỹ hài">đam mỹ
-                            hài</a></span>
-                </li>
-                <li>
-                    <span class="badge text-bg-light"><a class="text-dark text-decoration-none"
-                            href="#" title="truyện xuyên nhanh">truyện
-                            xuyên
-                            nhanh</a></span>
-                </li>
-                <li class="me-1">
-                    <span class="badge text-bg-light"><a class="text-dark text-decoration-none"
-                            href="#" title="đam mỹ hài">đam mỹ
-                            hài</a></span>
-                </li>
-                <li>
-                    <span class="badge text-bg-light"><a class="text-dark text-decoration-none"
-                            href="#" title="truyện xuyên nhanh">truyện
-                            xuyên
-                            nhanh</a></span>
-                </li>
-                <li class="me-1">
-                    <span class="badge text-bg-light"><a class="text-dark text-decoration-none"
-                            href="#" title="đam mỹ hài">đam mỹ
-                            hài</a></span>
-                </li>
-                <li>
-                    <span class="badge text-bg-light"><a class="text-dark text-decoration-none"
-                            href="#" title="truyện xuyên nhanh">truyện
-                            xuyên
-                            nhanh</a></span>
-                </li>
-                <li class="me-1">
-                    <span class="badge text-bg-light"><a class="text-dark text-decoration-none"
-                            href="#" title="đam mỹ hài">đam mỹ
-                            hài</a></span>
-                </li>
-                <li>
-                    <span class="badge text-bg-light"><a class="text-dark text-decoration-none"
-                            href="#" title="truyện xuyên nhanh">truyện
-                            xuyên
-                            nhanh</a></span>
-                </li>
+                </li> --}}
+                
             </ul>
 
             <div class="col-12"> <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img

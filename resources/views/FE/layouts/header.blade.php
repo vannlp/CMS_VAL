@@ -2,7 +2,7 @@
     <!-- place navbar here -->
     <nav class="navbar navbar-expand-lg navbar-dark header__navbar p-md-0">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/">
                 <img src="{{asset('/FE/assets/images/logo_text.png')}}" alt="Logo Suu Truyen" srcset="" class="img-fluid"
                     style="width: 200px;">
             </a>
@@ -18,10 +18,13 @@
                             aria-expanded="false">
                             Thể loại
                         </a>
+                        @php
+                            $categories = App\Models\StoryCategory::where('status', 1)->where('type', 'category')->get();    
+                        @endphp
                         <ul class="dropdown-menu dropdown-menu-custom">
                             @foreach ($categories as $category)
                             <li>
-                                <a class="dropdown-item" href="category.html">{{$category->name}}</a>
+                                <a class="dropdown-item" href="{{route('categoryPage', ['slug' => $category->slug])}}">{{$category->name}}</a>
                             </li>
                             @endforeach
                         </ul>

@@ -19,6 +19,7 @@ class StoryChapter extends Model
         'description',
         'slug',
         'status',
+        'chapter_num',
         'created_at',
         'updated_at',
     ];

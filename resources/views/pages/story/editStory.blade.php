@@ -109,6 +109,17 @@
               
               <div class="col-6 mb-4">
                 <div class="form-floating form-floating-outline">
+                    <select id="list_type_create" class="form-select select2" multiple name="type[]">
+                        @foreach ($listType as $key => $type)
+                            <option {{in_array($key, $story->type) ? "selected": ''}}  value="{{$key}}">{{$type['name']}}</option>
+                        @endforeach
+                    </select>
+                  <label for="list_type_create">{{__('app.base.type')}}</label>
+                </div>
+              </div>
+              
+              <div class="col-6 mb-4">
+                <div class="form-floating form-floating-outline">
                     <select id="author_id_create" class="form-select select2" name="author_id">
                         <option value="-1">--Chọn tác giả--</option>
                         @foreach ($authors as $author)

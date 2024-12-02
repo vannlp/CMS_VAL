@@ -83,10 +83,13 @@ class StoryController extends Controller
         $categoies = $this->storyCategoryRepository->where('type', 'category')->where('status', 1)->get();
         $authors = $this->storyCategoryRepository->where('type', 'author')->where('status', 1)->get();
         
+        $listType = StoryPost::TYPE;
+        
         return view('pages.story.editStory', [
             'story' => $story,
             'categories' => $categoies,
             'authors' => $authors,
+            'listType' => $listType
         ]);
     }
     

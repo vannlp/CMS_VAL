@@ -26,11 +26,34 @@ class HomeController extends Controller
         $categories = $this->storyCategoryRepository->getCategories()->get();
         $categoryOption = $this->storyCategoryRepository->getCategoryHomeOption()->take(6)->get();
         $topStoryPostViews = $this->storyPostRepository->getStoryPostByView()->take(12)->get();
+        $newStorys = $this->storyPostRepository->getNewStory()->take(16)->get();
+        $fullStorys = $this->storyPostRepository->getStoryByType(['full'])->take(16)->get();
+        // get categories
+        $categoryIds = $newStorys->pluck('list_category')->flatten()->unique();
+        // Lấy thông tin chi tiết các danh mục
+        $categories2 = $this->storyCategoryRepository->select(['id', 'name', 'slug'])->whereIn('id', $categoryIds)->get()->keyBy('id');
+
+        // Gán danh mục vào từng bài viết
+        $newStorys->map(function ($story) use ($categories2) {
+            $story->categories = collect($story->list_category)->map(function ($id) use ($categories2) {
+                return $categories2->get($id);
+            });
+            return $story;
+        });
         
         return view('FE.pages.home', [
             'categories' => $categories,
             'categoryOption' => $categoryOption,
-            'topStoryPostViews' => $topStoryPostViews
+            'topStoryPostViews' => $topStoryPostViews,
+            'newStorys' => $newStorys,
+            'fullStorys' => $fullStorys,
         ]);
+    }
+    
+    public function getStoryHtml(Request $request, $category_id) {
+        $getStoryByCategory = $this->storyPostRepository->getStoryByCategory($category_id)->take(12)->get();
+        
+        return response()->view('FE.partials.hotStoryItem', ['getStoryByCategory' => $getStoryByCategory], 200)
+                     ->header('Content-Type', 'text/html');
     }
 }

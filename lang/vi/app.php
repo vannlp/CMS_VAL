@@ -74,6 +74,7 @@ return [
         'chapters_count' => "Số chapter",
         'title_chapter' => 'Tên chương',
         'slug_chapter' => 'Slug chương',
-        'status_chapter' => 'Trạng thái chương'
+        'status_chapter' => 'Trạng thái chương',
+        'chapter_number' => "Thứ tự chương"
     ]
 ];

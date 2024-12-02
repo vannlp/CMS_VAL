@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\Models\StoryChapter;
 use App\Models\StoryPost;
 
 class StoryPostRepository extends Repository {
@@ -21,6 +22,12 @@ class StoryPostRepository extends Repository {
             $data['status'] = 0;
         } else {
             $data['status'] = 1;
+        }
+        
+        if(empty($data['type'])) {
+            $data['type'] = [
+                'new'
+            ];
         }
         
         if(empty($data['author_id']) || $data['author_id'] == $authorIdNull) {
@@ -49,5 +56,35 @@ class StoryPostRepository extends Repository {
     
     public function getStoryPostByView() {
         return $this->model->withCount('views')->where('status', 1)->orderBy('views_count', 'asc');
+    }
+    
+    public function getNewStory() {
+        return $this->model->with(['newChapter:id,title,slug,story_chapter.story_id,chapter_num'])
+            ->addSelect([
+                'latest_chapter_date' => StoryChapter::select('created_at')
+                    ->whereColumn('story_post.id', 'story_chapter.story_id')
+                    ->latest('created_at')
+                    ->limit(1),
+            ])
+            ->where('status', 1)
+            ->orderBy('latest_chapter_date', 'desc');
+    }
+    
+    
+    public function getStoryByType($type = []) {
+        $typeString = json_encode($type);
+        return $this->model->with(['newChapter:id,title,slug,story_chapter.story_id,chapter_num'])
+            ->withCount(['views', 'chaptersActive'])
+            ->where('status', 1)
+            ->whereRaw("JSON_CONTAINS(type, '{$typeString}')")
+            ->orderBy('views_count', 'asc');
+    }
+    
+    public function getStoryByCategory($category_id) {
+        if(!$category_id) {
+            return $this->getStoryPostByView();
+        }
+        
+        return $this->getStoryPostByView()->whereJsonContains('list_category', $category_id);
     }
 }
