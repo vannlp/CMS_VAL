@@ -51,10 +51,13 @@ class StoryController extends Controller
             'slug' => ['required', 'string', 'unique:story_post'],
             'list_category' => ['array'],
             'author_id' => ['nullable'],   
+            'author_option' => ['required'],
             'avatar'  => ['nullable', 'string']
         ]);
         
         $input = $request->all();
+        $authorOption = $input['author_option'] ?? 1;
+        $authorName = trim($input['author_name']) ?? null;
         
         if(!empty($input['slug'])) {
             $input['slug'] = Str::slug($input['slug']);
@@ -62,6 +65,18 @@ class StoryController extends Controller
         
         try {
             DB::beginTransaction();
+            
+            // xử lý author
+            if(!$authorOption) {
+                $category = $this->storyCategoryRepository->where('name', $authorName)->first();
+                
+                if(!$category) {   
+                    $category = $this->storyCategoryRepository->createAuthorByName($authorName);
+                }
+                
+                $input['author_id'] = $category->id;
+            }
+            
             $story = $this->storyPostRepository->create($input);
             
             DB::commit();

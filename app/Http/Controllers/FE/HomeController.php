@@ -23,6 +23,12 @@ class HomeController extends Controller
     ) {}
     
     public function index() {
+        // $truyenFull = new TruyenFull();
+        
+        // $truyenFull->scrape(9, 1531, "https://truyenfull.io/linh-vu-thien-ha/chuong-1532/", 1535);
+        
+        // die;
+        
         $categories = $this->storyCategoryRepository->getCategories()->get();
         $categoryOption = $this->storyCategoryRepository->getCategoryHomeOption()->take(6)->get();
         $topStoryPostViews = $this->storyPostRepository->getStoryPostByView()->take(12)->get();

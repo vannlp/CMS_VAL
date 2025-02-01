@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\StoryCategory;
+use Illuminate\Support\Str;
 
 class StoryCategoryRepository extends Repository {
     /**
@@ -26,6 +27,24 @@ class StoryCategoryRepository extends Repository {
         } else {
             $data['status'] = 1;
         }
+
+        $storyCategory = parent::create($data);
+
+        return $storyCategory;
+    }
+    
+    public function createAuthorByName(string $name) {
+        $model = $this->getModel();
+        
+        $data['parent_id'] = null;
+        
+        $data['status'] = 1;
+        
+        $data['short_description'] = $name;
+        $data['name'] = $name;
+        $data['slug'] = Str::slug($name);
+        $data['type'] = 'author';
+        $data['description'] = "";
 
         $storyCategory = parent::create($data);
 

@@ -9,3 +9,4 @@ Route::get('/truyen/{slug}', [PageController::class, 'detail'])->name('detailPag
 Route::get('/get-hot-post-by-category/{category_id}', [HomeController::class, 'getStoryHtml'])->name('getStoryHtml');
 Route::get('/danh-muc/{slug}', [PageController::class, 'categoryPage'])->name('categoryPage');
 Route::get('/{slugStory}/{slugChapter}', [PageController::class, 'detailChapter'])->name('detailChapter');
+Route::get('/tim-kiem', [PageController::class, 'searchPage'])->name('searchPage');

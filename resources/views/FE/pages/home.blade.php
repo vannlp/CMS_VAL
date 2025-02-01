@@ -89,7 +89,7 @@
                         <div class="head-title-global d-flex justify-content-between mb-2">
                             <div class="col-6 col-md-4 col-lg-4 head-title-global__left d-flex align-items-center">
                                 <h2 class="me-2 mb-0 border-bottom border-secondary pb-1">
-                                    <a href="https://suustore.com/#"
+                                    <a href="#"
                                         class="d-block text-decoration-none text-dark fs-4 story-name"
                                         title="Truyện Mới">Truyện Mới</a>
                                 </h2>
@@ -113,11 +113,11 @@
                                                     d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z">
                                                 </path>
                                             </svg>
-                                            <a href="#"
+                                            <a href="{{route('detailPage', ['slug' => $story->slug])}}"
                                                 class="text-decoration-none text-dark fs-6 hover-title text-one-row story-name">{{$story->title}}</a>
                                         </h3>
                                         @foreach (\App\Models\StoryPost::TYPE as $key => $type)
-                                            @if(in_array($key,$storyPost->type)) 
+                                            @if(in_array($key, $story->type)) 
                                             <span class="{{$type['class']}} me-1">{{$type['name']}}</span>
                                             @endif
                                         @endforeach
@@ -127,13 +127,15 @@
                                         <p class="mb-0">
                                             @foreach ($story->categories as $category)
                                             <a href="{{route('categoryPage', ['slug' => $category->slug])}}"
-                                            class="hover-title text-decoration-none text-dark category-name">{{$category->name}}, </a>
+                                            class="hover-title text-decoration-none text-dark category-name">{{$category->name}}@if(!$loop->last), @endif </a>
                                             @endforeach
                                         </p>
                                     </div>
 
                                     <div class="story-item-no-image__chapters ms-2">
-                                        <a href="#" class="hover-title text-decoration-none text-info">Chương
+                                        <a 
+                                            href="{{route('detailChapter', ['slugStory' => $story->slug, 'slugChapter' => $story->newChapter->slug])}}"
+                                            class="hover-title text-decoration-none text-info">Chương
                                             {{$story->newChapter->chapter_num ?? ""}}</a>
                                     </div>
 
@@ -197,12 +199,12 @@
                         
                         @foreach ($fullStorys as $story)
                         <div class="story-item-full text-center">
-                            <a href="#" class="d-block story-item-full__image">
+                            <a href="{{route('detailPage', ['slug' => $story->slug])}}" class="d-block story-item-full__image">
                                 <img src="{{$story->avatar}}" alt="{{$story->title}}" class="img-fluid w-100"
                                     width="150" height="230" loading="lazy">
                             </a>
                             <h3 class="fs-6 story-item-full__name fw-bold text-center mb-0">
-                                <a href="#"
+                                <a href="{{route('detailPage', ['slug' => $story->slug])}}"
                                     class="text-decoration-none text-one-row story-name">
                                     {{$story->title}}
                                 </a>

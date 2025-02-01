@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark header__navbar p-md-0">
         <div class="container">
             <a class="navbar-brand" href="/">
-                <img src="{{asset('/FE/assets/images/logo_text.png')}}" alt="Logo Suu Truyen" srcset="" class="img-fluid"
+                <img src="{{asset('/FE/images/logo-truyenFn.png')}}" alt="Logo Suu Truyen" srcset="" class="img-fluid"
                     style="width: 200px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -29,7 +29,7 @@
                             @endforeach
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
+                    {{-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             Theo số chương
@@ -48,7 +48,7 @@
                                     1000</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
 
                 <div class="form-check form-switch me-3 d-flex align-items-center">
@@ -73,8 +73,8 @@
                     </label>
                 </div>
 
-                <form class="d-flex header__form-search" action="" method="GET">
-                    <input class="form-control search-story" type="text" placeholder="Tìm kiếm" name="key_word"
+                <form class="d-flex header__form-search" action="{{route('searchPage')}}" method="GET">
+                    <input class="form-control search-story" type="text" placeholder="Tìm kiếm" name="s"
                         value="">
                     <div class="col-12 search-result shadow no-result d-none">
                         <div class="card text-white bg-light">
@@ -107,7 +107,7 @@
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
-                <img src="{{asset('/FE/assets/images/logo_text.png')}}" alt="Logo Suu Truyen" srcset="" class="img-fluid"
+                <img src="{{asset('/FE/images/logo-truyenFn.png')}}" alt="Logo truyenFn" srcset="" class="img-fluid"
                     style="width: 200px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
@@ -117,7 +117,7 @@
             <div class="offcanvas offcanvas-end text-bg-dark w-75" tabindex="-1" id="offcanvasDarkNavbar"
                 aria-labelledby="offcanvasDarkNavbarLabel">
                 <div class="offcanvas-header">
-                    <img src="{{asset('/FE/assets/images/logo_text.png')}}" alt="Logo Suu Truyen" srcset="" class="img-fluid"
+                    <img src="{{asset('/FE/images/logo-truyenFn.png')}}" alt="Logo truyenFn" srcset="" class="img-fluid"
                         style="width: 200px;">
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>

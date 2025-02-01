@@ -149,7 +149,7 @@
                                         @foreach ($storyCategories as $category)
                                             <a href="{{route('categoryPage', ['slug'=>$category->slug])}}"
                                                 class="text-decoration-none text-dark hover-title  me-1 "
-                                                style="width: max-content;">{{$category->name}} ,
+                                                style="width: max-content;">{{$category->name}}@if(!$loop->last), @endif
                                             </a>
                                         @endforeach
                                     </div>
@@ -235,7 +235,7 @@
                                 </a>
                             </li>
                         </ul> --}}
-                        {{ $chapters->onEachSide(3)->links('FE.partials.pagination') }}
+                        {{ $chapters->onEachSide(1)->links('FE.partials.pagination') }}
                     </div>
                 </div>
                 

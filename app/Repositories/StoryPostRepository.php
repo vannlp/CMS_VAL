@@ -66,8 +66,15 @@ class StoryPostRepository extends Repository {
                     ->latest('created_at')
                     ->limit(1),
             ])
+            ->whereHas('newChapter', function($q) {
+                $q->where('status', 1);
+            })
             ->where('status', 1)
             ->orderBy('latest_chapter_date', 'desc');
+    }
+    
+    public function getSearchStory(string $searchValue) {
+        return $this->getNewStory()->where('title', 'like', "%{$searchValue}%");
     }
     
     
@@ -82,9 +89,18 @@ class StoryPostRepository extends Repository {
     
     public function getStoryByCategory($category_id) {
         if(!$category_id) {
-            return $this->getStoryPostByView();
+            return $this->getStoryPostByView()->with(['newChapter:id,title,slug,story_chapter.story_id,chapter_num'])
+            ->whereHas('newChapter', function($q) {
+                $q->where('status', 1);
+            });
+                
         }
         
-        return $this->getStoryPostByView()->whereJsonContains('list_category', $category_id);
+        return $this->getStoryPostByView()
+            ->with(['newChapter:id,title,slug,story_chapter.story_id,chapter_num'])
+            ->whereHas('newChapter', function($q) {
+                $q->where('status', 1);
+            })
+            ->whereJsonContains('list_category', $category_id);
     }
 }

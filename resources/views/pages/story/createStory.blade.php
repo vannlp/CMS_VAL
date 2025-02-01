@@ -94,15 +94,42 @@
                 </div>
               </div>
               
-              <div class="col-6 mb-4">
-                <div class="form-floating form-floating-outline">
-                    <select id="author_id_create" class="form-select select2" name="author_id">
+              <div class="col-6 mb-5 border p-3 rounded">
+                <div >
+                    <label for="author_id_create">{{__('app.base.author')}}</label>
+                    <div id="author_option_checked">
+                      <div class="form-check mt-4">
+                        <input
+                          name="author_option"
+                          class="form-check-input"
+                          type="radio"
+                          value="0"
+                          id="author_option_tu_nhap" />
+                        <label class="form-check-label" for="author_option_tu_nhap"> Tự nhập </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          name="author_option"
+                          class="form-check-input"
+                          type="radio"
+                          value="1"
+                          id="author_option_select"
+                          checked />
+                        <label class="form-check-label" for="author_option_select"> Chọn Tác giả có sẵn </label>
+                      </div>
+                    </div>
+                    
+                    <div id="author_option_content">
+                      <input type="text" id="author_name" class="form-control" name="author_name" placeholder="Nhập tên tác giả">
+                      
+                      <select id="author_id_create" class="form-select select2" name="author_id">
                         <option value="-1">--Chọn tác giả--</option>
                         @foreach ($authors as $author)
-                            <option value="{{$author->id}}">{{$author->name}}</option>
+                          <option value="{{$author->id}}">{{$author->name}}</option>
                         @endforeach
-                    </select>
-                  <label for="author_id_create">{{__('app.base.author')}}</label>
+                      </select>
+                    </div>
+                    
                 </div>
               </div>
               
@@ -236,5 +263,31 @@
   $('#lfm').filemanager('image');
   
   // Ghi đè callback mặc định của filemanager
+  $(document).ready(function() {
+    let author_option = $('input[name="author_option"]:checked').val() ?? 1;
+  
+    function changeOptionAuthor(author_option = 1) {
+      const author_name = $("#author_name");
+      const author_id = $("#author_id_create") ;
+      
+      if(author_option == 1) {
+        author_name.css('display', 'none');
+        author_id.select2().next().show();
+      } else {
+        author_name.css('display', 'block');
+        author_id.select2().next().hide();
+      }
+    }
+    
+    changeOptionAuthor(author_option);
+    
+    $('input[name="author_option"]').change(function() {
+      let author_option = $('input[name="author_option"]:checked').val() ?? 1;
+    
+      changeOptionAuthor(author_option);
+    });
+  })
+  
+  
 </script>
 @endpush

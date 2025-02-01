@@ -51,7 +51,9 @@ class PageController extends Controller
     
     public function categoryPage(Request $request, $slug) {
         $category = $this->storyCategoryRepository->where('slug', $slug)->first();
-        $getStoryByCategory = $this->storyPostRepository->getStoryByCategory("$category->id")->take(12)->get();
+        $getStoryByCategory = $this->storyPostRepository
+            ->getStoryByCategory("$category->id")
+            ->paginate(20);
         return view('FE.pages.categoryPage', [
             'category' => $category,
             'getStoryByCategory' => $getStoryByCategory,
@@ -92,6 +94,21 @@ class PageController extends Controller
             'story' => $story,
             'nextChapter' => $nextChapter,
             'prevChapter' => $prevChapter
+        ]);
+    }
+    
+    public function searchPage(Request $request) {
+        $searchValue = $request->get('s', null);
+        
+        if(!$searchValue) {
+            return abort(404);
+        }
+        
+        $listStoryPost = $this->storyPostRepository->getSearchStory($searchValue)->take(12)->get();
+        
+        return view('FE.pages.searchPage', [
+            'listStoryPost' => $listStoryPost,
+            'searchValue' => $searchValue
         ]);
     }
     
